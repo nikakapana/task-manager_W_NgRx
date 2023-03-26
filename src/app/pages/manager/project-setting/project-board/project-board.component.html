@@ -1,0 +1,26 @@
+<div class="new-board" routerLink="add">
+    <div>
+        <i class="fa-sharp fa-solid fa-plus"></i>
+        <p>Add a New Board</p>
+    </div>
+</div>
+<h2>Boards</h2>
+<div class="container" *ngIf="boards$ | async as boards">
+    <div class="card" *ngFor="let board of boards" [routerLink]="[board.id]">
+        <p> {{ board.name }} </p>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+            (click)="onAccordionClick($event)">
+            <i class="fa-solid fa-ellipsis"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <i class="fa-regular fa-pen-to-square"></i>
+                <span><a [routerLink]="['edit', board.id]">Edit</a></span>
+            </button>
+            <button mat-menu-item>
+                <i class="fa-solid fa-trash"></i>
+                <span><a (click)="deleteBoard(board.id)">Delete</a></span>
+            </button>
+        </mat-menu>
+    </div>
+</div>

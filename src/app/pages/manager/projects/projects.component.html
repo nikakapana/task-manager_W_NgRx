@@ -1,0 +1,45 @@
+<h1>Start a New Project</h1>
+<div class="new-project card" routerLink="create">
+  <i class="fa-sharp fa-solid fa-plus plus-sign"></i>
+</div>
+<h1>Your Projects</h1>
+<div class="projects-container">
+
+
+
+  <div *ngFor="let item of projects" class="project-container">
+    <div class="card work">
+      <div class="img-section" style="--project-color: {{item.color}};">
+      </div>
+      <div class="card-desc">
+        <div class="card-header">
+          <div class="card-title">{{ item.abbreviation }}</div>
+          <!-- add delete/update buttons here-->
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <i class="fa-regular fa-pen-to-square"></i>
+              <span><a [routerLink]="['/projects/edit', project.id]">Edit</a></span>
+            </button>
+            <button mat-menu-item>
+              <i class="fa-solid fa-trash"></i>
+              <span><a>Delete</a></span>
+            </button>
+          </mat-menu>
+        </div>
+        <div class="card-time">
+          <button routerLink="board/:{{ item.id }}">
+            {{ item.name }}
+          </button>
+        </div>
+        <p>Description:</p>
+        <p class="recent">{{ item.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner color="#1098ad" size="large" style="color: #1098ad;" bdColor="none" type="square-jelly-box">
+  <p class="loading">Please Wait...</p>
+</ngx-spinner>

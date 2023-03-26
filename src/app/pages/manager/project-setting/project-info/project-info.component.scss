@@ -1,0 +1,25 @@
+.testimonial-section {
+  color: white;
+  padding: 24px;
+  border-radius: 12px;
+}
+.testimonial-box {
+  grid-column: 2 / -1;
+  align-self: center;
+}
+
+.testimonial-box {
+  margin-bottom: 24px;
+  font-size: 24px;
+
+}
+
+span {
+  display: inline-block;
+  margin-left: 20px;
+}
+.grid-3-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 80px;
+}

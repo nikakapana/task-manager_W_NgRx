@@ -1,0 +1,50 @@
+<h1>Create a New Project</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="container">
+
+    <div class="form-group">
+      <label for="name">Project Name:</label>
+      <input type="text" id="name" formControlName="name">
+      <div class="invalid-feedback is-invalid" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="abbreviation">Abreviation:</label>
+      <input type="text" id="abbreviation" formControlName="abbreviation">
+      <div class="invalid-feedback" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" id="description" formControlName="description">
+      <div class="invalid-feedback" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="color">Choose Color:</label>
+      <input type="color" id="color" formControlName="color">
+      <div class="invalid-feedback" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+
+    </div>
+    <ng-container *ngIf="projectId else Create">
+      <button type="submit">Update Project</button>
+
+    </ng-container>
+
+    <ng-template #Create>
+      <button mat-raised-button color="primary" type="submit">Create Project</button>
+
+    </ng-template>
+
+  </div>
+  <div class="img">
+    <!--<img src="../../../../../assets/pexels-photo-3194519.jpeg" alt="">-->
+
+  </div>
+</form>

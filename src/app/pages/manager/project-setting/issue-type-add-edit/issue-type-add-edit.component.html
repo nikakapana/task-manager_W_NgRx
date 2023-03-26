@@ -1,0 +1,45 @@
+<form [formGroup]="form">
+  <div class="container">
+  <label for="name">Name:</label>
+  <input type="text" id="name" placeholder="Name" formControlName="name">
+
+  <label for="description">Description:</label>
+  <input type="text" id="description" placeholder="Description" formControlName="description">
+
+  <label for="type">Type:</label>
+  <select id="type" formControlName="type">
+    <option *ngFor="let issueType of issueTypes" [value]="issueType">{{issueType}}</option>
+
+  </select>
+<div>
+  <label for="color">Color:</label>
+  <input id="color" formControlName="color" type="color">
+</div>
+  <div>
+  <label for="icon">Icon:</label>
+  <input id="icon" formControlName="icon" placeholder="Icon">
+  </div>
+  <button (click)="addColumn()">Add Field</button>
+  <button (click)="save()">Save</button>
+
+
+  <div class="column" formArrayName="issueTypeColumns">
+    <div *ngFor="let column of columnsFormArray.controls; let i = index" class="item">
+      <div [formGroupName]="i">
+<label for="Fname">Name:</label>
+
+        <input id="Fname" formControlName="name" >
+        <div>
+        <label for="Fname">Field Name:</label>
+
+        <input id="Field-name" formControlName="filedName">
+        </div>
+          <label for="Field-name">Is Required:</label>
+        <input type="checkbox" formControlName="isRequired">
+
+      </div>
+      </div>
+  </div>
+  </div>
+
+</form>

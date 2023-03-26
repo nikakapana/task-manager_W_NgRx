@@ -1,0 +1,13 @@
+<section class="testimonial-section" [ngStyle]="{'background-color': project.color}">
+  <div class="grid-3-cols">
+
+    <div class="testimonial-box">
+      <h3>Project Name: <span>{{project.name}}</span></h3>
+      <h3>Project Abbreviation: <span>{{project.abbreviation}}</span> </h3>
+      <h3>Project Desctiption: <span>{{project.description}}</span></h3>
+      <h3>Project Created At: <span>{{project.createdAt}}</span></h3>
+
+      <button mat-raised-button [routerLink]="['/projects/edit', project.id]">Edit Project</button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+<div class="board-head">
+
+
+  <div class="user-list">
+    <h3>Users:</h3>
+    <div *ngFor="let user of users$ | async" class="user-item">
+      {{user.email}}
+    </div>
+  </div>
+<div class="boards-container">
+  <a [routerLink]="['/dashboard/' + board.id]" class="board-name" [class.selected]="selectedBoard === board.id"  (click)="onBoardSelected(board.id)" *ngFor="let board of boards$ | async">Board: {{board.name}}</a>
+
+</div>
+</div>
+<div class="dashboard" cdkDropListGroup>
+
+  <div class="column"
+       cdkDropList
+       *ngFor="let column of board.columns"
+       [cdkDropListData]="tasks[column.id] || []"
+       (cdkDropListDropped)="drop($event,column)">
+<div class="column-header">
+    <div class="">{{ column.taskStatus }}</div>
+    <div ><button class="task-button" (click)="addTask(column)">Add Task</button></div>
+</div>
+    <div class="column-body">
+
+      <div class="task" *ngFor="let task of tasks[column.id] || []" cdkDrag (dblclick)="viewTask(task, column)">
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <div class="task-type-and-button-container">
+        <div >
+        <button class="task-delete" (click)="deleteTask(task.id)">X</button>
+
+        </div>
+
+        <p class="issue-type" >{{task.issueType.type}}</p>
+        </div>
+        <div class="task-header">
+          <h4>{{task.name}}</h4>
+
+          <h4>{{task.createdBy.email}}</h4>
+        </div>
+        <p>{{task.description}}</p>
+
+<div class="createdBy">{{task.createdAt | date:'yyyy-MM-dd HH:mm'}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner  color="#1098ad" size="large" style="color: #1098ad;" bdColor="none" type="square-jelly-box">
+  <p class="loading">Please Wait...</p>
+</ngx-spinner>

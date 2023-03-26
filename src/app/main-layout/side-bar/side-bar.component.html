@@ -1,0 +1,35 @@
+<ng-container *ngIf="userIsAuthenticated;">
+  <div class="sidebar-container">
+    <div class="sidebar">
+      <a routerLink="projects" class="all">All projects</a>
+      <a  [appPermissions]="['role:list']" routerLink="/roles" class="all">Manage Roles</a>
+      <div>
+        <ul>
+          <li>
+            <a routerLink="/projects/setting/info">Info</a>
+          </li>
+          <li>
+            <a routerLink="/projects/setting/boards">Boards</a>
+          </li>
+          <li>
+            <a [appPermissions]="['issueType:list']" routerLink="/projects/setting/issue-types">Issue types</a>
+          </li>
+          <li>
+            <a [appPermissions]="['epic:list']" routerLink="/projects/setting/epics">Epics</a>
+          </li>
+          <li>
+            <a [appPermissions]="['user:list']" routerLink="/projects/setting/users">Users</a>
+          </li>
+        </ul>
+      </div>
+
+
+
+
+    </div>
+    <div class="sidebar-img"></div>
+  </div>
+
+
+
+</ng-container>

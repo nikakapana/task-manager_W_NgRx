@@ -1,0 +1,39 @@
+
+<div class="corner-blob"></div>
+<div class="auth-page-img"></div>
+<div class="form-container">
+
+    <form class="example-form" [formGroup]="form" (ngSubmit)="submit()">
+        <h1>Sign Up</h1>
+        <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName" placeholder="Ex. Luke">
+            <mat-error *ngIf="form.controls['firstName'].hasError('required')">
+                First Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="lastName" placeholder="Ex.  Skywalker">
+            <mat-error *ngIf="form.controls['lastName'].hasError('required')">
+                Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email" placeholder="Ex.  l.skywalker@rebelalliance.org">
+            <mat-error *ngIf="form.controls['email'].hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="••••••">
+            <mat-error *ngIf="form.controls['password'].hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">Create an Account</button>
+    </form>
+</div>
+

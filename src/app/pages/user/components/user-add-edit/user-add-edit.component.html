@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Add User</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="first name" formControlName ="firstName">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="lastName" formControlName ="lastName">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Identity Number</mat-label>
+            <input matInput placeholder="Identity Number" formControlName ="identityNumber">
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>email</mat-label>
+            <input matInput placeholder="email" formControlName ="email">
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>Mobile Number</mat-label>
+            <input matInput placeholder="mobile number" formControlName ="mobileNumber">
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-content>    
+    <button mat-button color="link" (click)="onSubmit()">Save</button>
+    <button mat-button color="link" (click)="dialogRef.close(true)">Cancel</button>
+</div>

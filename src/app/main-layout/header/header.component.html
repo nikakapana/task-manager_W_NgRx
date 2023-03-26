@@ -1,0 +1,53 @@
+<mat-toolbar class="main-nav"
+  [ngStyle]="{'background-color': currentProject?.color ? currentProject?.color : 'rgb(50, 4, 134)'}">
+  <a><img src="../../../assets/logo.png" class="logo" alt="Task Manager" routerLink="/" style="cursor: pointer"></a>
+  <div class="navigation">
+
+    <ng-container *ngIf="userIsAuthenticated; else notAuthenticated">
+
+      <a routerLink="/" class="nav-item" mat-raised-button>Home</a>
+
+      <a [appPermissions]="['user:list']" routerLink="/users" class="nav-item" mat-raised-button>All users</a>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <i class="fa-solid fa-user"></i>
+      </button>
+      <button class="plus-icon-container" #tooltip="matTooltip" matTooltip="New Project" routerLink="/projects/create">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="updatePassword">
+          <i class="fa-sharp fa-solid fa-pen"></i>
+          <span> Change Password </span>
+        </button>
+      </mat-menu>
+      <a routerLink="/dashboard" class="newProject">Dashboard</a>
+      <a routerLink="/backlog" class="newProject">Backlog</a>
+      <mat-select [(ngModel)]="currentProject!.id" (ngModelChange)="selectProject($event)" *ngIf="currentProject">
+        <mat-option [appPermissions]="['project:list']" *ngFor="let project of projects$ | async" [value]="project.id">
+          {{project.name}}
+        </mat-option>
+      </mat-select>
+      <ng-container *ngIf="currentProject">
+        <a class="newProject" routerLink="/projects/setting">Settings</a>
+      </ng-container>
+
+
+      <a routerLink="/" class="nav-item" mat-raised-button (click)="signOut()">Sign Out</a>
+
+    </ng-container>
+
+
+    <ng-template #notAuthenticated>
+      <div class="auth-buttons">
+        <a routerLink="/auth/login">Sign In</a>
+        <a routerLink="/auth/signup">Sign Up</a>
+      </div>
+
+    </ng-template>
+
+
+  </div>
+</mat-toolbar>
+

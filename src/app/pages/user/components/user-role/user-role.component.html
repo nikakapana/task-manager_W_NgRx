@@ -1,0 +1,15 @@
+<div [formGroup]="form">
+    <mat-form-field>
+        <mat-label>Set Role</mat-label>
+        <mat-select multiple formControlName="roles">
+            <mat-option *ngFor = "let option of roles$ | async" [value]="option.id">
+                {{option.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div>
+        <button mat-raised-button color="primary" (click)="submit()">Save</button>
+        <button mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
+    </div>
+</div>
