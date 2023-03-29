@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,7 @@ import { PermissionsDirective } from './core/permission-directive/permissions.di
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {ProjectEffect, projectReducer} from "./store";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 
@@ -67,7 +68,8 @@ project: projectReducer
     }, {}),
     EffectsModule.forRoot([
 ProjectEffect
-    ])
+    ]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
 
   ],
   providers: [

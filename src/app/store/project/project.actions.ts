@@ -13,3 +13,11 @@ export const loadProjectsFailure = createAction(
   '[Project] Load Projects Failure',
   props<{ error: any }>()
 );
+export const setProject = createAction(
+  '[Project] Set Project',
+  props<{ projectId: any }>()
+);
+
+
+
+

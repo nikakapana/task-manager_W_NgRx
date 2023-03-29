@@ -1,6 +1,12 @@
 import {createReducer, on} from "@ngrx/store";
-import {loadProjects, loadProjectsFailure, loadProjectsSuccess} from "./project.actions";
+import {
+  loadProjects,
+  loadProjectsFailure,
+  loadProjectsSuccess,
+  setProject,
+} from "./project.actions";
 import {Project} from "../../core/interfaces";
+
 
 
 
@@ -22,5 +28,13 @@ export const projectReducer = createReducer(
       projects: action.data
     }
   }),
-  on(loadProjectsFailure, (state, action) => state)
+  on(loadProjectsFailure, (state, action) => state),
+  on(setProject, (state, action) => {
+    const project = state.projects.find((project) => project.id === action.projectId);
+    project && localStorage.setItem('project', JSON.stringify(project));
+    return {
+      ...state,
+      currentProject: project || null
+    }
+  })
 )

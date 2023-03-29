@@ -6,6 +6,8 @@ import { Project } from "../../core/interfaces";
 import { ProjectFacade } from "../../core/facades/project.facade";
 import { Router } from "@angular/router";
 import { FormControl } from '@angular/forms';
+import {Store} from "@ngrx/store";
+import {loadProjects, ProjectStateModule, setProject} from "../../store";
 
 
 @Component({
@@ -25,12 +27,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
   currentProject?: Project; //= this.projectFacade.getProject()
-  projects$ = this.projectFacade.myProjects$;
+  projects$ = this.store.select(state => state.project.projects)
   constructor(
     private authFacadeService: AuthFacadeService,
     private projectsService: ProjectsService,
     private projectFacade: ProjectFacade,
     private router: Router,
+    private store: Store<{project: ProjectStateModule}>
   ) { }
 
   get project(): Project {
@@ -41,6 +44,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+
     const id: number = this.project.id;
 
     console.log(this.project)
@@ -50,7 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       console.log(this.currentProject)
     })
 
-
+this.store.dispatch(loadProjects())
 
   }
 
@@ -64,7 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.authFacadeService.token
   }
   getMyProjects() {
-    this.projectFacade.getMyProjects$().subscribe();
+    this.store.dispatch(loadProjects())
   }
 
   signOut() {
@@ -74,14 +78,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
   selectProject(projectId: any) {
-    this.projectFacade.setProject(projectId);
-    this.currentProjectId = projectId;
-    this.projectFacade.getProjectFromService(projectId).subscribe((res) => {
-      this.currentProject = res;
-      console.log(this.currentProject)
-    })
-    console.log(this.currentProject)
-this.refreshPage()
+
+    this.store.dispatch(setProject({projectId}))
+    // this.projectFacade.setProject(projectId);
+    //
+    // this.currentProjectId = projectId;
+    // this.projectFacade.getProjectFromService(projectId).subscribe((res) => {
+    //   this.currentProject = res;
+    //   console.log(this.currentProject)
+    // })
+    // console.log(this.currentProject)
+// this.refreshPage()
   }
 
   ngOnDestroy(): void {
