@@ -22,6 +22,9 @@ import { UpdatePasswordComponent } from './pages/update-password/update-password
 import { MatInputModule } from '@angular/material/input';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { PermissionsDirective } from './core/permission-directive/permissions.directive';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import {ProjectEffect, projectReducer} from "./store";
 
 
 
@@ -58,7 +61,13 @@ import { PermissionsDirective } from './core/permission-directive/permissions.di
     NgxSpinnerModule,
 
     MatTableModule,
-    PermissionsDirective
+    PermissionsDirective,
+    StoreModule.forRoot({
+project: projectReducer
+    }, {}),
+    EffectsModule.forRoot([
+ProjectEffect
+    ])
 
   ],
   providers: [
