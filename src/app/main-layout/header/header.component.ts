@@ -7,7 +7,7 @@ import { ProjectFacade } from "../../core/facades/project.facade";
 import { Router } from "@angular/router";
 import { FormControl } from '@angular/forms';
 import {Store} from "@ngrx/store";
-import {loadProjects, ProjectStateModule, setProject} from "../../store";
+import {initCurrentProject, loadProjects, ProjectStateModule, setProject} from "../../store";
 
 
 @Component({
@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     })
 
 this.store.dispatch(loadProjects())
+    this.store.dispatch(initCurrentProject())
 
   }
 

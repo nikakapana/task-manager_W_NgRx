@@ -18,6 +18,8 @@ export const setProject = createAction(
   props<{ projectId: any }>()
 );
 
-
+export const initCurrentProject = createAction(
+  '[Project] Init Current Project'
+)
 
 

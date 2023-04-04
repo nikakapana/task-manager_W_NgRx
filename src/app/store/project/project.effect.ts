@@ -5,7 +5,7 @@ import {
   loadProjects,
   loadProjectsFailure,
   loadProjectsSuccess,
-  setProject
+  initCurrentProject
 } from "./project.actions";
 import {catchError, map, of, switchMap} from "rxjs";
 
@@ -27,18 +27,5 @@ export class ProjectEffect {
     ))
   ))
 
-// setProject$ = createEffect( () => this.actions$.pipe(
-//   ofType(setProject),
-//   switchMap((action) => this.projectService.getProject(action.projectId).pipe(
-//     map((data) => setProjectSuccess({data})),
-//     catchError((error) => of(setProjectFailure({error})))
-//   ))
-// ))
-//
-//   setProjectSuccess = createEffect( () => this.actions$.pipe(
-//     ofType(setProjectSuccess),
-//     map((action) => {
-//       localStorage.setItem('project', JSON.stringify(action.data));
-//     })
-//   ), {dispatch: false})
+
 }

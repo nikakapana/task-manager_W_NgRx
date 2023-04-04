@@ -1,11 +1,13 @@
 import {createReducer, on} from "@ngrx/store";
 import {
+  initCurrentProject,
   loadProjects,
   loadProjectsFailure,
   loadProjectsSuccess,
   setProject,
 } from "./project.actions";
 import {Project} from "../../core/interfaces";
+import {state} from "@angular/animations";
 
 
 
@@ -35,6 +37,12 @@ export const projectReducer = createReducer(
     return {
       ...state,
       currentProject: project || null
+    }
+  }),
+  on(initCurrentProject, (state) => {
+    const project = localStorage.getItem('project');
+    return {
+      ...state, currentProject: project ? JSON.parse(project): null
     }
   })
 )
