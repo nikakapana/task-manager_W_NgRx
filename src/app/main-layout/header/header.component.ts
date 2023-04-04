@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthFacadeService } from "../../pages/auth/auth.facade.service";
 import { ProjectsService } from "../../core/services/projects.service";
-import { Observable, Subject } from "rxjs";
-import { Project } from "../../core/interfaces";
+import { Subject } from "rxjs";
 import { ProjectFacade } from "../../core/facades/project.facade";
 import { Router } from "@angular/router";
-import { FormControl } from '@angular/forms';
 import {Store} from "@ngrx/store";
 import {initCurrentProject, loadProjects, ProjectStateModule, setProject} from "../../store";
+import {currentProject} from "../../store/project/project.selector";
 
 
 @Component({
@@ -20,13 +19,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   sub$ = new Subject()
   projects = []
-  disableSelect = new FormControl(false);
-  currentProjectId?: Project;
 
 
 
 
-  currentProject?: Project; //= this.projectFacade.getProject()
+
+  currentProject?: any = this.store.select(currentProject);
   projects$ = this.store.select(state => state.project.projects)
   constructor(
     private authFacadeService: AuthFacadeService,
@@ -36,34 +34,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private store: Store<{project: ProjectStateModule}>
   ) { }
 
-  get project(): Project {
-    return this.projectFacade.getProject()
-  }
-
 
 
   ngOnInit(): void {
 
 
-    const id: number = this.project.id;
 
-    console.log(this.project)
-    this.getMyProjects();
-    this.projectFacade.getProjectFromService(id).subscribe((res) => {
-      this.currentProject = res;
-      console.log(this.currentProject)
-    })
 
 this.store.dispatch(loadProjects())
     this.store.dispatch(initCurrentProject())
 
   }
 
-  refreshPage() {
-    setTimeout(() => {
-      window.location.reload();
-    }, 700);
-  }
 
   get userIsAuthenticated() {
     return this.authFacadeService.token

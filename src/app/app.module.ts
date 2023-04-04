@@ -64,7 +64,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatTableModule,
     PermissionsDirective,
     StoreModule.forRoot({
-project: projectReducer
+'project': projectReducer
     }, {}),
     EffectsModule.forRoot([
 ProjectEffect
